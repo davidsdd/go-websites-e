@@ -231,10 +231,9 @@ h2 { margin: 0; font-weight: 500; }
   .closing-mark { margin-top: 10px; }
 }
 
-/* 电脑窗口较矮时，优先收紧留白，避免固定标题区域撑出滚动条。 */
+/* 保持顶部标志的原始间距，只收紧标题区域与下方留白。 */
 @media (min-width: 601px) and (max-height: 900px) {
   .page {
-    padding-top: clamp(26px, 5svh, 48px);
     padding-bottom: clamp(24px, 4.5svh, 42px);
   }
   .hero { min-height: 0; padding: clamp(24px, 6svh, 70px) 0 clamp(28px, 7svh, 83px); }
