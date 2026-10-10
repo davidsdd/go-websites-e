@@ -180,8 +180,6 @@ h2 { margin: 0; font-weight: 500; }
   text-transform: uppercase;
 }
 
-.separator { padding-left: 4px; }
-
 .branch-title {
   display: block;
   max-width: 510px;
