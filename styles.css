@@ -1,0 +1,232 @@
+/* 字体随网站保存在本地。无需联网，也不需要安装字体。 */
+@font-face {
+  font-family: "Cormorant Garamond";
+  src: url("./fonts/cormorant-garamond-latin.woff2") format("woff2");
+  font-style: normal;
+  font-weight: 400 500;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "DM Sans";
+  src: url("./fonts/dm-sans-latin.woff2") format("woff2");
+  font-style: normal;
+  font-weight: 400 500;
+  font-display: swap;
+}
+
+/* 浅色主题。修改这些颜色即可调整配色。 */
+:root {
+  --paper: #f7f3ec;
+  --ink: #47382c;
+  --warm-ink: #6d5542;
+  --gold: #917750;
+  --line: rgba(145, 119, 80, 0.27);
+  --section-ink: #775e3f;
+  --selection: #e5d8c3;
+  --glow-left: rgba(235, 218, 189, 0.37);
+  --glow-right: rgba(235, 221, 200, 0.3);
+}
+
+/* 自动跟随系统深色模式；系统主题变化时，浏览器会即时更新。 */
+@media (prefers-color-scheme: dark) {
+  :root {
+    --paper: #1e1916;
+    --ink: #f0e7d9;
+    --warm-ink: #dac5aa;
+    --gold: #c2a477;
+    --line: rgba(194, 164, 119, 0.28);
+    --section-ink: #cbb492;
+    --selection: #64513f;
+    --glow-left: rgba(118, 85, 61, 0.15);
+    --glow-right: rgba(118, 89, 62, 0.1);
+  }
+}
+
+* { box-sizing: border-box; }
+
+html { color-scheme: light dark; }
+
+body {
+  margin: 0;
+  background: var(--paper);
+  color: var(--ink);
+  font-family: "DM Sans", Arial, sans-serif;
+  -webkit-font-smoothing: antialiased;
+}
+
+::selection { background: var(--selection); color: var(--ink); }
+
+.page {
+  position: relative;
+  isolation: isolate;
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+  min-height: 100svh;
+  padding: 48px clamp(32px, 9vw, 150px) 42px;
+  background:
+    radial-gradient(ellipse at 17% 22%, var(--glow-left), transparent 55%),
+    radial-gradient(ellipse at 89% 61%, var(--glow-right), transparent 49%),
+    var(--paper);
+}
+
+.page::before {
+  content: "";
+  position: absolute;
+  z-index: -1;
+  inset: 20px;
+  border: 1px solid var(--line);
+  pointer-events: none;
+}
+
+.masthead {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 27px;
+  flex: 0 0 auto;
+}
+
+.emblem { width: 64px; height: 64px; color: var(--gold); }
+
+.masthead-line {
+  width: 72px;
+  height: 1px;
+  background: var(--line);
+}
+
+.hero {
+  flex: 1 0 auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 37px;
+  min-height: 445px;
+  padding: 70px 0 83px;
+  text-align: center;
+}
+
+h1 {
+  margin: 0;
+  font-family: "Cormorant Garamond", Georgia, serif;
+  font-size: clamp(62px, 7.6vw, 112px);
+  font-weight: 500;
+  line-height: 1.04;
+  letter-spacing: -0.035em;
+  text-wrap: balance;
+}
+
+.title-line { display: block; }
+.corporation { color: var(--warm-ink); }
+
+.ornament {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  color: var(--gold);
+}
+
+.ornament::before, .ornament::after {
+  content: "";
+  display: block;
+  width: 39px;
+  height: 1px;
+  background: var(--line);
+}
+
+.ornament span {
+  width: 5px;
+  height: 5px;
+  transform: rotate(45deg);
+  background: currentColor;
+}
+
+.branches {
+  flex: 0 0 auto;
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  border-top: 1px solid var(--line);
+}
+
+.branch {
+  position: relative;
+  padding: 34px 35px 24px;
+  text-align: center;
+}
+
+.branch + .branch::before {
+  content: "";
+  position: absolute;
+  top: 32px;
+  bottom: 24px;
+  left: 0;
+  width: 1px;
+  background: var(--line);
+}
+
+h2 { margin: 0; font-weight: 500; }
+
+.section-name {
+  display: block;
+  margin-bottom: 15px;
+  color: var(--section-ink);
+  font-family: "DM Sans", Arial, sans-serif;
+  font-size: 11px;
+  font-weight: 500;
+  line-height: 1.5;
+  letter-spacing: 0.17em;
+  text-transform: uppercase;
+}
+
+.separator { padding-left: 4px; }
+
+.branch-title {
+  display: block;
+  max-width: 510px;
+  margin-inline: auto;
+  font-family: "Cormorant Garamond", Georgia, serif;
+  font-size: clamp(27px, 2.65vw, 38px);
+  line-height: 1.14;
+  letter-spacing: -0.015em;
+  text-wrap: balance;
+}
+
+.closing-mark {
+  width: 32px;
+  height: 1px;
+  margin: 24px auto 0;
+  background: var(--gold);
+  opacity: 0.65;
+}
+
+@media (min-width: 1600px) {
+  .page { padding-top: 64px; padding-bottom: 54px; }
+  .hero { min-height: 560px; }
+}
+
+@media (max-width: 900px) {
+  .page { padding: 39px 54px 35px; }
+  .hero { min-height: 420px; padding: 68px 0; }
+  h1 { font-size: clamp(52px, 8.5vw, 75px); }
+  .branch { padding-inline: 24px; }
+  .branch-title { font-size: 28px; }
+}
+
+@media (max-width: 600px) {
+  .page { padding: 35px 32px 31px; }
+  .page::before { inset: 12px; }
+  .masthead { gap: 19px; }
+  .masthead-line { width: 42px; }
+  .emblem { width: 56px; height: 56px; }
+  .hero { min-height: 325px; padding: 64px 0; gap: 29px; }
+  h1 { font-size: clamp(32px, 9.7vw, 56px); line-height: 1.08; letter-spacing: -0.025em; }
+  .branches { grid-template-columns: 1fr; }
+  .branch { padding: 25px 7px 28px; }
+  .branch + .branch { border-top: 1px solid var(--line); }
+  .branch + .branch::before { display: none; }
+  .section-name { font-size: 10px; margin-bottom: 11px; }
+  .branch-title { max-width: 340px; font-size: 27px; }
+  .closing-mark { margin-top: 10px; }
+}
